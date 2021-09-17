@@ -1,0 +1,39 @@
+:root {
+  --indigo: #312e81;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Crimson Text", serif;
+}
+
+.heading {
+  font-size: 40px;
+  margin-top: 60px;
+}
+
+.label-element {
+  font-size: 25px;
+}
+
+.date-input {
+  width: 300px;
+  padding: 0.7rem;
+  border-radius: 1rem;
+  margin-top: 20px;
+  border: 2px solid var(--indigo);
+}
+
+.show-button {
+  padding: 0.6rem;
+  margin-top: 1rem;
+  width: 150px;
+  background-color: var(--indigo);
+  color: white;
+  border-radius: 1rem;
+  font-size: 18px;
+  font-family: "Crimson Text", serif;
+}
