@@ -119,6 +119,52 @@ function getNextDate(date) {
   };
 }
 
+function getLastDate(date) {
+  // decrementing date by a day
+  // console.log(date);
+  var day = date.day - 1;
+  var month = date.month;
+  var year = date.year;
+
+  // daysInMonth is an array having all the days in months
+  var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  // if day is less than 0
+  if (day === 0) {
+    // if month is one, change the month to 12th & reduce year by 1
+    if (month === 1) {
+      day = 31;
+      month = 12;
+      year = year - 1;
+      // otherwise if day is zero, change the day to last month's days in month
+      // And month should be last month
+    } else if (day === 0) {
+      day = daysInMonth[month - 2];
+      month = month - 1;
+    }
+  }
+
+  //   checking if the month is February
+  if (month === 2) {
+    // If year is leap year last date would be 29
+    if (checkIfLeapYear(year) === true) {
+      if (day === 28) {
+        day = 29;
+        month = 2;
+      }
+    } else if (day === 28) {
+      day === 28;
+      month = 2;
+    }
+  }
+
+  return {
+    day: day,
+    month: month,
+    year: year,
+  };
+}
+
 function getNextPolindrome(date) {
   // Keeping counter as zero
   var counter = 0;
@@ -136,11 +182,31 @@ function getNextPolindrome(date) {
   return [counter, nextDate];
 }
 
+function getLastPolindrome(date) {
+  // Keeping counter as zero
+  var counter = 0;
+  // Getting last date
+  var lastDate = getLastDate(date);
+  // the loop will run until we get a palindrome
+  while (1) {
+    counter = counter + 1;
+    if (checkPalindromeForAllDateVariation(lastDate)) {
+      break;
+    }
+    lastDate = getLastDate(lastDate);
+  }
+  return [counter, lastDate];
+}
+
+// console.log(getLastPolindrome(date));
+
 var date = {
   day: 31,
   month: 12,
   year: 2021,
 };
+
+console.log(getLastDate(date));
 
 showButton.addEventListener("click", function () {
   var dateString = dateInput.value;
@@ -155,16 +221,34 @@ showButton.addEventListener("click", function () {
     output.innerHTML = "Yay ! Your Birthday is Palindrome";
   } else {
     var nextPalindrome = getNextPolindrome(date);
-    output.innerHTML =
-      "Next Palindrome is on " +
-      nextPalindrome[1].day +
-      "-" +
-      nextPalindrome[1].month +
-      "-" +
-      nextPalindrome[1].year +
-      " You missed it by " +
-      nextPalindrome[0] +
-      "days";
+    var lastPalindrome = getLastPolindrome(date);
+    console.log(nextPalindrome[0]);
+
+    if (nextPalindrome[0] < lastPalindrome[0]) {
+      output.innerHTML =
+        "Next Palindrome is on " +
+        nextPalindrome[1].day +
+        "-" +
+        nextPalindrome[1].month +
+        "-" +
+        nextPalindrome[1].year +
+        " You missed it by " +
+        nextPalindrome[0] +
+        "days";
+    } else {
+      output.innerHTML =
+        "Last Palindrome was on " +
+        lastPalindrome[1].day +
+        "-" +
+        lastPalindrome[1].month +
+        "-" +
+        lastPalindrome[1].year +
+        " You missed it by " +
+        lastPalindrome[0] +
+        "days";
+      console.log(lastPalindrome[0]);
+      console.log(nextPalindrome[0]);
+    }
   }
 
   console.log(dateString);
@@ -178,3 +262,4 @@ showButton.addEventListener("click", function () {
 // console.log(checkIfLeapYear(2021));
 // console.log(getNextDate(date));
 console.log(getNextPolindrome(date));
+console.log(checkPalindromeForAllDateVariation(date));
