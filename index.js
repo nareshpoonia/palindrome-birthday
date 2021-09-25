@@ -121,40 +121,32 @@ function getNextDate(date) {
 
 function getLastDate(date) {
   // decrementing date by a day
-  // console.log(date);
   var day = date.day - 1;
   var month = date.month;
   var year = date.year;
 
   // daysInMonth is an array having all the days in months
   var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  // daysInMonthLeapYear is an array of all days in months in leap year
+  var daysInMonthLeapYear = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-  // if day is less than 0
+  // Check if day is 0
   if (day === 0) {
-    // if month is one, change the month to 12th & reduce year by 1
+    // If month is 1, change the date to 31, month.....
     if (month === 1) {
       day = 31;
       month = 12;
       year = year - 1;
-      // otherwise if day is zero, change the day to last month's days in month
-      // And month should be last month
-    } else if (day === 0) {
-      day = daysInMonth[month - 2];
+    }
+    // if year is leap year
+    else if (checkIfLeapYear(year) === true) {
+      day = daysInMonthLeapYear[month - 2];
       month = month - 1;
     }
-  }
-
-  //   checking if the month is February
-  if (month === 2) {
-    // If year is leap year last date would be 29
-    if (checkIfLeapYear(year) === true) {
-      if (day === 28) {
-        day = 29;
-        month = 2;
-      }
-    } else if (day === 28) {
-      day === 28;
-      month = 2;
+    // if year isn't leap year
+    else {
+      day = daysInMonth[month - 2];
+      month = month - 1;
     }
   }
 
@@ -198,12 +190,10 @@ function getLastPolindrome(date) {
   return [counter, lastDate];
 }
 
-// console.log(getLastPolindrome(date));
-
 var date = {
-  day: 31,
+  day: 1,
   month: 12,
-  year: 2021,
+  year: 1999,
 };
 
 console.log(getLastDate(date));
@@ -217,6 +207,7 @@ showButton.addEventListener("click", function () {
     year: Number(splittedDate[0]),
   };
   var isPalindrome = checkPalindromeForAllDateVariation(date);
+  console.log(getLastDate(date));
   if (isPalindrome === true) {
     output.innerHTML = "Yay ! Your Birthday is Palindrome";
   } else {
@@ -253,13 +244,3 @@ showButton.addEventListener("click", function () {
 
   console.log(dateString);
 });
-
-// console.log(reverseString(str));
-// console.log(checkPalindrome(str));
-// console.log(convertDateToString(date));
-// console.log(convertDateToAllVariation(date));
-// console.log(checkPalindromeForAllDateVariation(date));
-// console.log(checkIfLeapYear(2021));
-// console.log(getNextDate(date));
-console.log(getNextPolindrome(date));
-console.log(checkPalindromeForAllDateVariation(date));
