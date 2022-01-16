@@ -1,5 +1,3 @@
-let str = "raceedcar";
-
 let dateInput = document.querySelector(".date-input");
 let showButton = document.querySelector(".show-button");
 let output = document.querySelector(".output");
@@ -194,8 +192,6 @@ showButton.addEventListener("click", () => {
         " You missed it by " +
         lastPalindrome[0] +
         "days";
-      console.log(lastPalindrome[0]);
-      console.log(nextPalindrome[0]);
     }
   }
 });
