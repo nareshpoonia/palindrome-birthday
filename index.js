@@ -16,16 +16,14 @@ const convertDateToString = (date) => {
     month: "",
     year: "",
   };
-  if (date.day < 10) {
-    blankDateString.day = "0" + date.day;
-  } else {
-    blankDateString.day = date.day.toString();
-  }
-  if (date.month < 10) {
-    blankDateString.month = "0" + date.month;
-  } else {
-    blankDateString.month = date.month.toString();
-  }
+  // Used ternary operator
+  date.day < 10
+    ? (blankDateString.day = "0" + date.day)
+    : (blankDateString.day = date.day.toString());
+  date.month < 10
+    ? (blankDateString.month = "0" + date.month)
+    : (blankDateString.month = date.month.toString());
+
   blankDateString.year = date.year.toString();
   return blankDateString;
 };
@@ -54,11 +52,11 @@ const checkPalindromeForAllDateVariation = (date) => {
 };
 
 const checkIfLeapYear = (year) => {
-  if (year % 4 != 0) {
+  if (year % 4 !== 0) {
     return false;
-  } else if (year % 100 != 0) {
+  } else if (year % 100 !== 0) {
     return true;
-  } else if (year % 400 != 0) {
+  } else if (year % 400 !== 0) {
     return false;
   } else return true;
 };
@@ -87,10 +85,11 @@ const getNextDate = (date) => {
     month = 1;
     year = year + 1;
   }
+  // Object Literal Shorthand
   return {
-    day: day,
-    month: month,
-    year: year,
+    day,
+    month,
+    year,
   };
 };
 
@@ -113,10 +112,11 @@ const getLastDate = (date) => {
       month = month - 1;
     }
   }
+  // Object Literal Shorthand
   return {
-    day: day,
-    month: month,
-    year: year,
+    day,
+    month,
+    year,
   };
 };
 
@@ -158,11 +158,13 @@ showButton.addEventListener("click", () => {
   let splittedDate = dateString.split("-");
   // Destructuring Arrays
   const [splittedYear, splittedMonth, splittedDay] = splittedDate;
+
   let date = {
     day: Number(splittedDay),
     month: Number(splittedMonth),
     year: Number(splittedYear),
   };
+
   let isPalindrome = checkPalindromeForAllDateVariation(date);
   console.log(getLastDate(date));
   if (isPalindrome === true) {
