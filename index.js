@@ -2,11 +2,8 @@ let dateInput = document.querySelector(".date-input");
 let showButton = document.querySelector(".show-button");
 let output = document.querySelector(".output");
 
-const reverseString = (str) => {
-  let splittedString = str.split("");
-  let reversedString = splittedString.reverse();
-  return splittedString.join("");
-};
+// Used default params & Chaining Methods with Optional Chaining
+const reverseString = (str = "") => str.split("")?.reverse()?.join("");
 
 const checkPalindrome = (str) => reverseString(str) === str;
 
