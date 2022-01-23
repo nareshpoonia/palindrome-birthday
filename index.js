@@ -156,10 +156,12 @@ let date = {
 showButton.addEventListener("click", () => {
   let dateString = dateInput.value;
   let splittedDate = dateString.split("-");
+  // Destructuring Arrays
+  const [splittedYear, splittedMonth, splittedDay] = splittedDate;
   let date = {
-    day: Number(splittedDate[2]),
-    month: Number(splittedDate[1]),
-    year: Number(splittedDate[0]),
+    day: Number(splittedDay),
+    month: Number(splittedMonth),
+    year: Number(splittedYear),
   };
   let isPalindrome = checkPalindromeForAllDateVariation(date);
   console.log(getLastDate(date));
@@ -168,30 +170,14 @@ showButton.addEventListener("click", () => {
   } else {
     let nextPalindrome = getNextPolindrome(date);
     let lastPalindrome = getLastPolindrome(date);
-    console.log(nextPalindrome[0]);
-
-    if (nextPalindrome[0] < lastPalindrome[0]) {
-      output.innerHTML =
-        "Next Palindrome is on " +
-        nextPalindrome[1].day +
-        "-" +
-        nextPalindrome[1].month +
-        "-" +
-        nextPalindrome[1].year +
-        " You missed it by " +
-        nextPalindrome[0] +
-        "days";
+    // Destructring Arrays
+    const [daysCountNext] = nextPalindrome;
+    const [daysCountLast] = lastPalindrome;
+    // Using Template Literals
+    if (daysCountNext < daysCountLast) {
+      output.innerHTML = `Next Palindrome is on ${nextPalindrome[1].day}-${nextPalindrome[1].month}-${nextPalindrome[1].year} You missed it by ${nextPalindrome[0]} days`;
     } else {
-      output.innerHTML =
-        "Last Palindrome was on " +
-        lastPalindrome[1].day +
-        "-" +
-        lastPalindrome[1].month +
-        "-" +
-        lastPalindrome[1].year +
-        " You missed it by " +
-        lastPalindrome[0] +
-        "days";
+      output.innerHTML = `Last Palindrome was on ${lastPalindrome[1].day}-${lastPalindrome[1].month}-${lastPalindrome[1].year} You missed it by ${lastPalindrome[0]} days`;
     }
   }
 });
